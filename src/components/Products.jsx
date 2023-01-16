@@ -9,9 +9,11 @@ export default function Products() {
         fetch("https://fakestoreapi.com/products").then(response => response.json()).then(data => setAllProducts(data))
     }
     const handleFilteredProducts = () => {
-        const filtered = allProducts.filter(product => product.category === category)
-        setFilteredProducts(filtered)
+        if (category) {
+            fetch(`https://fakestoreapi.com/products/category/${category}`).then(response => response.json()).then(data => setFilteredProducts(data))
+        }
     }
+    console.log(filteredProducts);
     useEffect(() => {
         getAllProducts()
         handleFilteredProducts()
